@@ -49,7 +49,6 @@ namespace BinPacking.Tests
 
             bool IsIntersecting(Vector2 position, Vector2 size, int exceptIndex)
             {
-                Bounds2 input = Bounds2.CreateFromTransform(position, size);
                 for (int i = 0; i < sizes.Length; i++)
                 {
                     if (i == exceptIndex)
@@ -59,8 +58,10 @@ namespace BinPacking.Tests
 
                     Vector2 otherPosition = positions[i];
                     Vector2 otherSize = sizes[i];
-                    Bounds2 other = Bounds2.CreateFromTransform(otherPosition, otherSize);
-                    if (input.Intersecting(other))
+                    if (position.X < otherPosition.X + otherSize.X &&
+                        position.X + size.X > otherPosition.X &&
+                        position.Y < otherPosition.Y + otherSize.Y &&
+                        position.Y + size.Y > otherPosition.Y)
                     {
                         return true;
                     }

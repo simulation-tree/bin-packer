@@ -38,7 +38,7 @@ public static class BinPackingFunctions
         switch (mode)
         {
             case SizeMode.PowerOf2:
-                dimensionSize = MathF.Pow(2, MathF.Ceiling(MathF.Log2(dimensionSize)));
+                dimensionSize = MathF.Pow(2, MathF.Ceiling(Log2(dimensionSize)));
                 break;
             case SizeMode.MultipleOf2:
                 dimensionSize = MathF.Ceiling(dimensionSize / 2f) * 2f;
@@ -50,6 +50,11 @@ public static class BinPackingFunctions
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(mode));
+        }
+
+        static float Log2(float x)
+        {
+            return MathF.Log(x) / MathF.Log(2);
         }
 
         return new Vector2(dimensionSize, dimensionSize);

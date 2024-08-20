@@ -97,10 +97,10 @@ public static class BinPackingFunctions
 
     public static Vector2 Pack<T>(this T packer, ReadOnlySpan<Vector2> sizes, Span<Vector2> positions, Vector2 padding = default) where T : unmanaged, IBinPacker
     {
-        Vector2 extraPadding = Vector2.Zero;
+        Vector2 size = new(4, 4);
         do
         {
-            Vector2 maxSize = GetEstimatedSize(packer, sizes, SizeMode.PowerOf2, padding + extraPadding);
+            Vector2 maxSize = GetEstimatedSize(packer, sizes, SizeMode.PowerOf2, padding + size);
             try
             {
                 packer.Pack(sizes, positions, maxSize, padding);
@@ -108,8 +108,7 @@ public static class BinPackingFunctions
             }
             catch (ImpossibleFitException)
             {
-                extraPadding += new Vector2(1f);
-                extraPadding *= 2;
+                size *= 2;
             }
         }
         while (true);

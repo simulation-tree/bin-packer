@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BinPacking
+namespace BinPacker
 {
     public class ImpossibleFitException : Exception
     {

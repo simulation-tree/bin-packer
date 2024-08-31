@@ -1,8 +1,8 @@
-﻿using BinPacking;
+﻿using BinPacker;
 using System;
 using System.Numerics;
 
-public static class BinPackingFunctions
+public static class BinPackerFunctions
 {
     /// <summary>
     /// Packs the given sizes into the span of positions.

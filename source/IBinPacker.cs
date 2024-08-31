@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
 
-namespace BinPacking
+namespace BinPacker
 {
     public interface IBinPacker
     {

@@ -2,7 +2,7 @@
 using System.Numerics;
 using Unmanaged;
 
-namespace BinPacking.Tests
+namespace BinPacker.Tests
 {
     public class PackingTests
     {

@@ -3,7 +3,7 @@ using System;
 using System.Numerics;
 using Unmanaged.Collections;
 
-namespace BinPacking
+namespace BinPacker
 {
     public unsafe readonly struct RecursivePacker : IBinPacker
     {

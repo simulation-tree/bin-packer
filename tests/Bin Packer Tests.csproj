@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>net9.0</TargetFramework>
-		<RootNamespace>BinPacking.Tests</RootNamespace>
+		<RootNamespace>BinPacker.Tests</RootNamespace>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<IsPackable>false</IsPackable>
@@ -27,7 +27,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\unmanaged\source\Unmanaged.csproj" />
-		<ProjectReference Include="..\source\Bin Packing.csproj" />
+		<ProjectReference Include="..\source\Bin Packer.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

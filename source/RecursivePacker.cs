@@ -1,18 +1,18 @@
 ﻿using RectpackSharp;
-using System;
 using System.Numerics;
+using Unmanaged;
 using Unmanaged.Collections;
 
 namespace BinPacker
 {
     public unsafe readonly struct RecursivePacker : IBinPacker
     {
-        void IBinPacker.Pack(ReadOnlySpan<Vector2> sizes, Span<Vector2> positions, Vector2 maxSize, Vector2 padding)
+        void IBinPacker.Pack(USpan<Vector2> sizes, USpan<Vector2> positions, Vector2 maxSize, Vector2 padding)
         {
-            using UnmanagedList<PackingRectangle> boxes = new((uint)sizes.Length);
-            for (uint i = 0; i < sizes.Length; i++)
+            using UnmanagedList<PackingRectangle> boxes = new(sizes.length);
+            for (uint i = 0; i < sizes.length; i++)
             {
-                Vector2 size = sizes[(int)i];
+                Vector2 size = sizes[i];
                 if (size != default)
                 {
                     PackingRectangle box = new();
@@ -30,7 +30,7 @@ namespace BinPacker
             uint stepSize = 1;
             try
             {
-                RectanglePacker.Pack(boxes.AsSpan(), out PackingRectangle bounds, hint, acceptableDensity, stepSize, maxWidth, maxHeight);
+                RectanglePacker.Pack(boxes.AsSpan().AsSystemSpan(), out PackingRectangle bounds, hint, acceptableDensity, stepSize, maxWidth, maxHeight);
             }
             catch
             {
@@ -41,7 +41,7 @@ namespace BinPacker
             {
                 PackingRectangle box = boxes[i];
                 uint index = (uint)box.Id;
-                positions[(int)index] = new Vector2(box.X + padding.X, box.Y + padding.Y);
+                positions[index] = new Vector2(box.X + padding.X, box.Y + padding.Y);
             }
         }
     }

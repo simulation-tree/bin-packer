@@ -29,14 +29,14 @@ namespace BinPacker.Tests
             Vector2[] positions = new Vector2[sizes.Length];
             packer.Pack(sizes, positions, maxSize, padding);
 
-            for (int i = 0; i < sizes.Length; i++)
+            for (uint i = 0; i < sizes.Length; i++)
             {
                 Vector2 size = sizes[i];
                 Vector2 position = positions[i];
                 Console.WriteLine($"Entry {i}: {position}, {size}");
             }
 
-            for (int i = 0; i < sizes.Length; i++)
+            for (uint i = 0; i < sizes.Length; i++)
             {
                 Vector2 size = sizes[i];
                 Vector2 position = positions[i];
@@ -47,9 +47,9 @@ namespace BinPacker.Tests
                 }
             }
 
-            bool IsIntersecting(Vector2 position, Vector2 size, int exceptIndex)
+            bool IsIntersecting(Vector2 position, Vector2 size, uint exceptIndex)
             {
-                for (int i = 0; i < sizes.Length; i++)
+                for (uint i = 0; i < sizes.Length; i++)
                 {
                     if (i == exceptIndex)
                     {
@@ -89,7 +89,7 @@ namespace BinPacker.Tests
                 RecursivePacker packer = new();
                 Vector2[] positions = new Vector2[sizes.Length];
                 packer.Pack(sizes, positions, maxSize, padding);
-                for (int i = 0; i < sizes.Length; i++)
+                for (uint i = 0; i < sizes.Length; i++)
                 {
                     Vector2 size = sizes[i];
                     Vector2 position = positions[i];
@@ -115,7 +115,7 @@ namespace BinPacker.Tests
             Vector2[] positions = new Vector2[sizes.Length];
             Vector2 maxSize = packer.Pack(sizes, positions, padding);
             Console.WriteLine($"Max size: {maxSize}");
-            for (int i = 0; i < sizes.Length; i++)
+            for (uint i = 0; i < sizes.Length; i++)
             {
                 Vector2 size = sizes[i];
                 Vector2 position = positions[i];
@@ -126,7 +126,7 @@ namespace BinPacker.Tests
         [Test]
         public void PerfectPack()
         {
-            Span<Vector2> sizes = stackalloc Vector2[4]
+            USpan<Vector2> sizes = stackalloc Vector2[4]
             {
                 new(32, 32),
                 new(32, 32),
@@ -135,9 +135,9 @@ namespace BinPacker.Tests
             };
 
             RecursivePacker packer = new();
-            Span<Vector2> positions = stackalloc Vector2[4];
+            USpan<Vector2> positions = stackalloc Vector2[4];
             packer.Pack(sizes, positions, new(64, 64), 0);
-            for (int i = 0; i < sizes.Length; i++)
+            for (uint i = 0; i < sizes.length; i++)
             {
                 Vector2 size = sizes[i];
                 Vector2 position = positions[i];

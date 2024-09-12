@@ -9,7 +9,7 @@ namespace RectpackSharp
     public static class RectanglePacker
     {
         /// <summary>A weak reference to the last list used, so it can be reused in subsequent packs.</summary>
-        private static WeakReference<List<PackingRectangle>> oldListReference;
+        private static WeakReference<List<PackingRectangle>>? oldListReference;
         private static readonly object oldListReferenceLock = new object();
 
         /// <summary>
@@ -30,9 +30,6 @@ namespace RectpackSharp
             PackingHints packingHint = PackingHints.FindBest, double acceptableDensity = 1, uint stepSize = 1,
             uint? maxBoundsWidth = null, uint? maxBoundsHeight = null)
         {
-            if (rectangles == null)
-                throw new ArgumentNullException(nameof(rectangles));
-
             if (stepSize == 0)
                 throw new ArgumentOutOfRangeException(nameof(stepSize), stepSize, nameof(stepSize) + " must be greater than 0.");
 
@@ -283,9 +280,9 @@ namespace RectpackSharp
 
             lock (oldListReferenceLock)
             {
-                if (oldListReference.TryGetTarget(out List<PackingRectangle> list))
+                if (oldListReference.TryGetTarget(out List<PackingRectangle>? list))
                 {
-                    oldListReference.SetTarget(null);
+                    oldListReference.SetTarget(null!);
                     return list;
                 }
                 else
@@ -305,7 +302,7 @@ namespace RectpackSharp
             {
                 lock (oldListReferenceLock)
                 {
-                    if (!oldListReference.TryGetTarget(out List<PackingRectangle> oldList) || oldList.Capacity < list.Capacity)
+                    if (!oldListReference.TryGetTarget(out List<PackingRectangle>? oldList) || oldList.Capacity < list.Capacity)
                         oldListReference.SetTarget(list);
                 }
             }

@@ -1,6 +1,6 @@
 {
-    "name": "com.popcron.bin-packing",
-    "displayName": "Bin Packing",
+    "name": "com.popcron.bin-packer",
+    "displayName": "Bin Packer",
     "version": "1.0.0",
     "author": {
         "name": "popcron"

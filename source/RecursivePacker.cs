@@ -9,8 +9,8 @@ namespace BinPacker
     {
         void IBinPacker.Pack(USpan<Vector2> sizes, USpan<Vector2> positions, Vector2 maxSize, Vector2 padding)
         {
-            using UnmanagedList<PackingRectangle> boxes = new(sizes.length);
-            for (uint i = 0; i < sizes.length; i++)
+            using UnmanagedList<PackingRectangle> boxes = new(sizes.Length);
+            for (uint i = 0; i < sizes.Length; i++)
             {
                 Vector2 size = sizes[i];
                 if (size != default)

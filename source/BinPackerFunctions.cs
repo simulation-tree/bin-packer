@@ -24,7 +24,7 @@ public static class BinPackerFunctions
     /// </summary>
     public static void Pack<T>(this T packer, USpan<Vector2> sizes, USpan<Vector2> positions, Vector2 maxSize, Vector2 padding = default) where T : unmanaged, IBinPacker
     {
-        if (sizes.length != positions.length)
+        if (sizes.Length != positions.Length)
         {
             throw new ArgumentException("Span of positions must be the same length as the span of sizes.");
         }

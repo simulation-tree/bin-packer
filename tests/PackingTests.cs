@@ -137,7 +137,7 @@ namespace BinPacker.Tests
             RecursivePacker packer = new();
             USpan<Vector2> positions = stackalloc Vector2[4];
             packer.Pack(sizes, positions, new(64, 64), 0);
-            for (uint i = 0; i < sizes.length; i++)
+            for (uint i = 0; i < sizes.Length; i++)
             {
                 Vector2 size = sizes[i];
                 Vector2 position = positions[i];

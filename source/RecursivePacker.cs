@@ -1,7 +1,7 @@
-﻿using RectpackSharp;
+﻿using Collections;
+using RectpackSharp;
 using System.Numerics;
 using Unmanaged;
-using Unmanaged.Collections;
 
 namespace BinPacker
 {
@@ -9,7 +9,7 @@ namespace BinPacker
     {
         void IBinPacker.Pack(USpan<Vector2> sizes, USpan<Vector2> positions, Vector2 maxSize, Vector2 padding)
         {
-            using UnmanagedList<PackingRectangle> boxes = new(sizes.Length);
+            using List<PackingRectangle> boxes = new(sizes.Length);
             for (uint i = 0; i < sizes.Length; i++)
             {
                 Vector2 size = sizes[i];

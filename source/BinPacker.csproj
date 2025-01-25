@@ -5,15 +5,10 @@
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<IsAotCompatible>True</IsAotCompatible>
-		<IsTrimmable>True</IsTrimmable>
-		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<Title>Bin Packer</Title>
+		<Authors>popcron</Authors>
+		<Company>game-simulations</Company>
+		<RepositoryUrl>https://github.com/game-simulations/bin-packer</RepositoryUrl>
 		<IsAotCompatible>True</IsAotCompatible>
 		<IsTrimmable>True</IsTrimmable>
 		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>

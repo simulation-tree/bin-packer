@@ -24,7 +24,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\unmanaged\source\Unmanaged.csproj" />
+		<ProjectReference Include="..\..\unmanaged\core\Unmanaged.Core.csproj" />
 		<ProjectReference Include="..\source\BinPacker.csproj" />
 	</ItemGroup>
 

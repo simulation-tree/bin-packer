@@ -30,7 +30,7 @@ namespace BinPacker
             uint stepSize = 1;
             try
             {
-                RectanglePacker.Pack(boxes.Slice(0, boxesCount), out PackingRectangle bounds, hint, acceptableDensity, stepSize, maxWidth, maxHeight);
+                RectanglePacker.Pack(boxes.GetSpan(boxesCount), out PackingRectangle bounds, hint, acceptableDensity, stepSize, maxWidth, maxHeight);
             }
             catch
             {

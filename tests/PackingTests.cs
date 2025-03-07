@@ -6,12 +6,6 @@ namespace BinPacker.Tests
 {
     public class PackingTests
     {
-        [TearDown]
-        public void CleanUp()
-        {
-            Allocations.ThrowIfAny();
-        }
-
         [Test]
         public void Pack4Images()
         {

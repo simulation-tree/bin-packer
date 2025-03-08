@@ -1,6 +1,6 @@
 # Bin Packing
 Solving the problem of "how do I arrange all of these boxes into a square?" by leveraging
-the [rectpack2D](https://github.com/TeamHypersomnia/rectpack2D) algorithm.
+the [rectpack2D](https://github.com/simulation-tree/rectpack2D) algorithm.
 
 ### Using
 There two main methods to the packer, one requires you to know the size ahead of time,

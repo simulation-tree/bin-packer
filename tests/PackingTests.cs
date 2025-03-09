@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Numerics;
-using Unmanaged;
 
 namespace BinPacker.Tests
 {
@@ -120,7 +119,7 @@ namespace BinPacker.Tests
         [Test]
         public void PerfectPack()
         {
-            USpan<Vector2> sizes = stackalloc Vector2[4]
+            System.Span<Vector2> sizes = stackalloc Vector2[4]
             {
                 new(32, 32),
                 new(32, 32),
@@ -129,9 +128,9 @@ namespace BinPacker.Tests
             };
 
             RecursivePacker packer = new();
-            USpan<Vector2> positions = stackalloc Vector2[4];
+            Span<Vector2> positions = stackalloc Vector2[4];
             packer.Pack(sizes, positions, new(64, 64), 0);
-            for (uint i = 0; i < sizes.Length; i++)
+            for (int i = 0; i < sizes.Length; i++)
             {
                 Vector2 size = sizes[i];
                 Vector2 position = positions[i];

@@ -119,7 +119,7 @@ namespace BinPacker.Tests
         [Test]
         public void PerfectPack()
         {
-            System.Span<Vector2> sizes = stackalloc Vector2[4]
+            Span<Vector2> sizes = stackalloc Vector2[4]
             {
                 new(32, 32),
                 new(32, 32),

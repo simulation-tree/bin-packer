@@ -6,7 +6,7 @@ namespace BinPacker
 {
     public unsafe readonly struct RecursivePacker : IBinPacker
     {
-        void IBinPacker.Pack(Span<Vector2> sizes, Span<Vector2> positions, Vector2 maxSize, Vector2 padding)
+        void IBinPacker.Pack(ReadOnlySpan<Vector2> sizes, Span<Vector2> positions, Vector2 maxSize, Vector2 padding)
         {
             Span<PackingRectangle> boxes = stackalloc PackingRectangle[sizes.Length];
             int boxesCount = 0;

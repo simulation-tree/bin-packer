@@ -26,7 +26,7 @@ namespace RectpackSharp
         /// <remarks>
         /// The <see cref="PackingRectangle.Id"/> values are never touched. Use this to identify your rectangles.
         /// </remarks>
-        public static void Pack(Span<PackingRectangle> rectangles, out PackingRectangle bounds,
+        public static bool TryPack(Span<PackingRectangle> rectangles, out PackingRectangle bounds,
             PackingHints packingHint = PackingHints.FindBest, double acceptableDensity = 1, uint stepSize = 1,
             uint? maxBoundsWidth = null, uint? maxBoundsHeight = null)
         {
@@ -44,7 +44,7 @@ namespace RectpackSharp
 
             bounds = default;
             if (rectangles.Length == 0)
-                return;
+                return true;
 
             // We separate the value in packingHint into the different options it specifies.
             Span<PackingHints> hints = stackalloc PackingHints[PackingHintExtensions.MaxHintCount];
@@ -110,7 +110,10 @@ namespace RectpackSharp
             }
 
             if (!hasSolution)
-                throw new Exception("Failed to find a solution. (Do your rectangles have a size close to uint.MaxValue or is your stepSize too high?)");
+            {
+                //throw new Exception("Failed to find a solution. (Do your rectangles have a size close to uint.MaxValue or is your stepSize too high?)");
+                return false;
+            }
 
             // The solution should be in the "rectangles" array passed as parameter.
             if (currentBest != rectangles)
@@ -118,6 +121,7 @@ namespace RectpackSharp
 
             // We return the list so it can be used in subsequent pack operations.
             ReturnList(emptySpaces);
+            return true;
         }
 
         /// <summary>

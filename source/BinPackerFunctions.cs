@@ -42,7 +42,7 @@ public static class BinPackerFunctions
             throw new ImpossibleFitException("Not enough space available to pack the given sizes.");
         }
 
-        packer.Pack(sizes, positions, maxSize, padding);
+        packer.TryPack(sizes, positions, maxSize, padding);
     }
 
     /// <summary>
@@ -51,19 +51,12 @@ public static class BinPackerFunctions
     public static Vector2 Pack<T>(this T packer, ReadOnlySpan<Vector2> sizes, Span<Vector2> positions, Vector2 padding = default) where T : unmanaged, IBinPacker
     {
         Vector2 size = new(4, 4);
-        do
+        while (!packer.TryPack(sizes, positions, size, padding))
         {
-            try
-            {
-                packer.Pack(sizes, positions, size, padding);
-                return size;
-            }
-            catch (ImpossibleFitException)
-            {
-                size *= 2;
-            }
+            size *= 2;
         }
-        while (true);
+        
+        return size;
     }
 
     /// <summary>

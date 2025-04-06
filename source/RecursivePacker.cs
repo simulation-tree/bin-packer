@@ -1,12 +1,15 @@
 ﻿using RectpackSharp;
 using System;
+using System.Diagnostics;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace BinPacker
 {
-    public unsafe readonly struct RecursivePacker : IBinPacker
+    [SkipLocalsInit]
+    public readonly struct RecursivePacker : IBinPacker
     {
-        void IBinPacker.Pack(ReadOnlySpan<Vector2> sizes, Span<Vector2> positions, Vector2 maxSize, Vector2 padding)
+        bool IBinPacker.TryPack(ReadOnlySpan<Vector2> sizes, Span<Vector2> positions, Vector2 maxSize, Vector2 padding)
         {
             Span<PackingRectangle> boxes = stackalloc PackingRectangle[sizes.Length];
             int boxesCount = 0;
@@ -23,6 +26,7 @@ namespace BinPacker
                 }
             }
 
+            Trace.WriteLine("2");
             uint maxWidth = (uint)maxSize.X;
             uint maxHeight = (uint)maxSize.Y;
             PackingHints hint = PackingHints.FindBest;
@@ -30,11 +34,15 @@ namespace BinPacker
             uint stepSize = 1;
             try
             {
-                RectanglePacker.Pack(boxes.Slice(0, boxesCount), out PackingRectangle bounds, hint, acceptableDensity, stepSize, maxWidth, maxHeight);
+                if (!RectanglePacker.TryPack(boxes.Slice(0, boxesCount), out PackingRectangle bounds, hint, acceptableDensity, stepSize, maxWidth, maxHeight))
+                {
+                    return false;
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                throw new ImpossibleFitException($"Not enough space available to pack the given sizes within the bounds of {maxSize}.");
+                Trace.TraceError(ex.ToString());
+                throw;
             }
 
             for (int i = 0; i < boxesCount; i++)
@@ -42,6 +50,8 @@ namespace BinPacker
                 PackingRectangle box = boxes[i];
                 positions[box.Id] = new Vector2(box.X + padding.X, box.Y + padding.Y);
             }
+
+            return true;
         }
     }
 }

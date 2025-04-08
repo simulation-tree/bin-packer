@@ -20,7 +20,7 @@ namespace BinPacker.Tests
             Vector2 maxSize = new(1000, 1000);
             Vector2 padding = new(10, 10);
             Vector2[] positions = new Vector2[sizes.Length];
-            packer.Pack(sizes, positions, maxSize, padding);
+            packer.TryPack(sizes, positions, maxSize, padding);
 
             for (uint i = 0; i < sizes.Length; i++)
             {
@@ -77,18 +77,10 @@ namespace BinPacker.Tests
                 new(50, 50),
             ];
 
-            Assert.Throws<ImpossibleFitException>(() =>
-            {
-                RecursivePacker packer = new();
-                Vector2[] positions = new Vector2[sizes.Length];
-                packer.Pack(sizes, positions, maxSize, padding);
-                for (uint i = 0; i < sizes.Length; i++)
-                {
-                    Vector2 size = sizes[i];
-                    Vector2 position = positions[i];
-                    Console.WriteLine($"Entry {i}: {position}, {size}");
-                }
-            });
+            RecursivePacker packer = new();
+            Vector2[] positions = new Vector2[sizes.Length];
+            bool success = packer.TryPack(sizes, positions, maxSize, padding);
+            Assert.That(success, Is.False, "Packing should fail when the sizes are too large to fit in the max size");
         }
 
         [Test]
@@ -129,7 +121,7 @@ namespace BinPacker.Tests
 
             RecursivePacker packer = new();
             Span<Vector2> positions = stackalloc Vector2[4];
-            packer.Pack(sizes, positions, new(64, 64), 0);
+            packer.TryPack(sizes, positions, new(64, 64), 0);
             for (int i = 0; i < sizes.Length; i++)
             {
                 Vector2 size = sizes[i];

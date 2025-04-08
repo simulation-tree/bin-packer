@@ -10,9 +10,9 @@ public static class BinPackerFunctions
     /// possible to contain within the space of <paramref name="maxSize"/>.
     /// </para>
     /// </summary>
-    public static void Pack<T>(this T packer, ReadOnlySpan<Vector2> sizes, Span<Vector2> positions, Vector2 maxSize, float padding = 0f) where T : unmanaged, IBinPacker
+    public static bool TryPack<T>(this T packer, ReadOnlySpan<Vector2> sizes, Span<Vector2> positions, Vector2 maxSize, float padding = 0f) where T : unmanaged, IBinPacker
     {
-        Pack(packer, sizes, positions, maxSize, new Vector2(padding));
+        return TryPack(packer, sizes, positions, maxSize, new Vector2(padding));
     }
 
     /// <summary>
@@ -21,7 +21,7 @@ public static class BinPackerFunctions
     /// possible to contain within the space of <paramref name="maxSize"/>.
     /// </para>
     /// </summary>
-    public static void Pack<T>(this T packer, ReadOnlySpan<Vector2> sizes, Span<Vector2> positions, Vector2 maxSize, Vector2 padding = default) where T : unmanaged, IBinPacker
+    public static bool TryPack<T>(this T packer, ReadOnlySpan<Vector2> sizes, Span<Vector2> positions, Vector2 maxSize, Vector2 padding = default) where T : unmanaged, IBinPacker
     {
         if (sizes.Length != positions.Length)
         {
@@ -42,7 +42,7 @@ public static class BinPackerFunctions
             throw new ImpossibleFitException("Not enough space available to pack the given sizes.");
         }
 
-        packer.TryPack(sizes, positions, maxSize, padding);
+        return packer.TryPack(sizes, positions, maxSize, padding);
     }
 
     /// <summary>

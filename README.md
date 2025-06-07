@@ -1,6 +1,6 @@
 # Bin Packing
 
-Provides a bin packing solving algorithm through the [rectpack2D](https://github.com/TeamHypersomnia/rectpack2D) project.
+Provides a bin packing solving algorithm through the [rectpack2D](https://github.com/simulation-tree/rectpack2D) project.
 
 ### Using
 

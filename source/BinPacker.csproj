@@ -1,22 +1,31 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
-        <ImplicitUsings>disable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <Title>Bin Packer</Title>
-        <Authors>popcron</Authors>
-        <Company>simulation-tree</Company>
-        <RepositoryUrl>https://github.com/simulation-tree/bin-packer</RepositoryUrl>
-        <IsAotCompatible>True</IsAotCompatible>
-        <IsTrimmable>True</IsTrimmable>
-        <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
-        <PackageId/>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Title>Bin Packer</Title>
+    <Authors>popcron</Authors>
+    <Company>simulation-tree</Company>
+    <RepositoryUrl>https://github.com/simulation-tree/bin-packer</RepositoryUrl>
+    <IsAotCompatible>True</IsAotCompatible>
+    <IsTrimmable>True</IsTrimmable>
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\..\unmanaged\core\Unmanaged.Core.csproj"/>
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\unmanaged\core\Unmanaged.Core.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="bin/Debug/net9.0/BinPacker.dll" Pack="true" PackagePath="tools/debug/BinPacker.dll" Visible="false"/>
+    <Content Include="bin/Debug/net9.0/BinPacker.xml" Pack="true" PackagePath="tools/debug/BinPacker.xml" Visible="false"/>
+    <Content Include="bin/Release/net9.0/BinPacker.dll" Pack="true" PackagePath="tools/release/BinPacker.dll" Visible="false"/>
+    <Content Include="bin/Release/net9.0/BinPacker.xml" Pack="true" PackagePath="tools/release/BinPacker.xml" Visible="false"/>
+    <Content Include="build/BinPacker.targets" Pack="true" PackagePath="build/BinPacker.targets" Visible="false"/>
+  </ItemGroup>
 
 </Project>
